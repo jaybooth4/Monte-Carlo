@@ -29,9 +29,9 @@ __global__ void getHits (int *c) {
 
     while (tid < NUMDARTS) {        
         // curand works like rand - except that it takes a state as a parameter 
-        r = curand(&state) * 1.0 / (RAND_MAX); //  Between 0 and 1      
+        r = curand_uniform_double(&state); //  Between 0 and 1      
 	x = -1 + 2 * r; //  Between -1 and 1
-	r = curand(&state) * 1.0 / (RAND_MAX);
+	r = curand_uniform_double(&state);
 	y = -1 + 2 * r;
 	if (((x * x) + (y * y)) <= 1)
 	{
@@ -94,7 +94,7 @@ int main () {
 
     printf("total_hits %f\n", total_hits);
 
-    double pi_estimate = 16.0 * total_hits/NUMDARTS;
+    double pi_estimate = 4.0 * total_hits/NUMDARTS;
     printf("Estimate for pi:  %f \n", pi_estimate);
     
 // free the memory allocated on the GPU    
